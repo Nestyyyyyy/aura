@@ -90,7 +90,10 @@
   .elsewhere { margin: 18px 0 0; padding: 14px 16px; background: var(--wash); border-radius: 4px; font-size: 16px; }
   .elsewhere p { margin: 0 0 10px; }
   .window { margin-top: clamp(40px, 5vw, 72px); }
-  .window img { width: 100%; }
+  /* Uygulama görüntüleri sayfanın zeminine değil, uygulamanın kendi lacivertine oturur: açık temada da koyu temada da uyumlu durur */
+  .stage { background: #161528; border-radius: 6px; padding: clamp(12px, 4vw, 56px); }
+  .stage img { width: 100%; }
+  .shots .stage { padding: clamp(10px, 1.8vw, 22px); }
 
   /* Bölümler: solda başlık, sağda içerik */
   section { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr); gap: 24px clamp(24px, 5vw, 80px); padding-block: clamp(56px, 8vw, 112px); border-top: 1px solid var(--ink); }
@@ -209,7 +212,7 @@
           </div>
         </div>
       </div>
-      <div class="window">
+      <div class="window stage">
         <picture>
           <source srcset="img/panel.webp" type="image/webp">
           <img src="img/panel.png" width="1068" height="712" fetchpriority="high" alt="Aura ana ekranı: ortada güç düğmesi ve KORUMA AKTİF yazısı, sağda 11 Roblox ve Discord sunucusunun erişim durumu ve gecikmesi">
@@ -233,11 +236,11 @@
         </dl>
         <div class="shots">
           <figure>
-            <img src="img/alan-adlari.webp" width="1068" height="712" loading="lazy" alt="Alan Adları sayfası: müdahale edilen sitelerin listesi ve site ekleme kutusu">
+            <div class="stage"><img src="img/alan-adlari.webp" width="1068" height="712" loading="lazy" alt="Alan Adları sayfası: müdahale edilen sitelerin listesi ve site ekleme kutusu"></div>
             <figcaption>Açılmayan bir sitenin adresini yaz. Aura engelli olup olmadığına bakar ve listeye ekler.</figcaption>
           </figure>
           <figure>
-            <img src="img/vpn.webp" width="1068" height="712" loading="lazy" alt="VPN sayfası: tüneli açma düğmesi ve bağlantı noktası seçenekleri">
+            <div class="stage"><img src="img/vpn.webp" width="1068" height="712" loading="lazy" alt="VPN sayfası: tüneli açma düğmesi ve bağlantı noktası seçenekleri"></div>
             <figcaption>VPN tek düğmeyle açılır. Varsayılan bağlantı çalışmazsa 5 yedek nokta vardır.</figcaption>
           </figure>
         </div>
