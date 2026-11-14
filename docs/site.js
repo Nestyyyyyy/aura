@@ -1,4 +1,4 @@
-// Aura sitesi: son sürümler, dosya boyutları ve kurulum dosyasının özeti GitHub'dan okunur.
+// Stryde sitesi: son sürümler, dosya boyutları ve kurulum dosyasının özeti GitHub'dan okunur.
 // GitHub'dan gelen her metin sayfaya textContent ile yazılır; innerHTML kullanılmaz (sürüm notuna gömülü HTML çalışmaz).
 (function () {
   var sayi = new Intl.NumberFormat("tr-TR", { maximumFractionDigits: 1 });
@@ -11,7 +11,7 @@
     kutu.hidden = false;
     document.getElementById("kopyala").addEventListener("click", function () {
       var durum = document.getElementById("kopyalandi");
-      var adres = "https://nestyyyyyy.github.io/aura/";
+      var adres = "https://nestyyyyyy.github.io/stryde/";
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(adres).then(function () { durum.textContent = " Kopyalandı."; }, function () { durum.textContent = " " + adres; });
       } else { durum.textContent = " " + adres; }
@@ -19,7 +19,7 @@
   }
 
   // Son 3 sürüm, dosya boyutları ve kurulum dosyasının özeti GitHub'dan okunur; ulaşılamazsa sayfadaki sabit yazılar kalır
-  fetch("https://api.github.com/repos/Nestyyyyyy/aura/releases?per_page=3")
+  fetch("https://api.github.com/repos/Nestyyyyyy/stryde/releases?per_page=3")
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (list) {
       if (!Array.isArray(list)) return;
@@ -31,11 +31,11 @@
         return a ? sayi.format(a.size / 1048576) + nb + "MB" : null;
       };
       document.getElementById("surum").textContent = "Sürüm " + son.tag_name.replace(/^v/, "") + ". Windows" + nb + "10 ve 11.";
-      var kur = mb("AuraSetup.exe"), tam = mb("Aura-tam.zip");
+      var kur = mb("StrydeSetup.exe"), tam = mb("Stryde-tam.zip");
       if (kur) document.getElementById("boyut").textContent = kur + ".";
       if (tam) document.getElementById("boyut-tam").textContent = "(" + tam + ")";
 
-      var ozet = (son.assets || []).find(function (x) { return x.name === "AuraSetup.exe"; });
+      var ozet = (son.assets || []).find(function (x) { return x.name === "StrydeSetup.exe"; });
       if (ozet && /^sha256:/.test(ozet.digest || "")) document.getElementById("ozet").textContent = ozet.digest.slice(7);
 
       var ul = document.createElement("ul");
