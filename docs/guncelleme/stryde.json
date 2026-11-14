@@ -1,9 +1,9 @@
 {
-  "version": "2.1.2",
-  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.2/Stryde.zip",
+  "version": "2.1.3",
+  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.3/Stryde.zip",
   "mirrors": ["https://nestyyyyyy.github.io/stryde/guncelleme/Stryde.zip", "https://cdn.jsdelivr.net/gh/Nestyyyyyy/stryde@main/docs/guncelleme/Stryde.zip"],
-  "sha256": "da7e6fb8e44eda3cb7e4864e94f5aa6c77702fc56a8e8aadf2ab0badcb48e4ed",
-  "sig": "MEQCIGzyM3BXUCs3mLMhgUYilghDbQS9fACd0KCAZdzc/lEAAiAo0pC7EIO5ok4OUZl/QV5lurBpKeeKmAvIsvXCE3/1uw==",
-  "notes": "Stryde'ın artık vurgu renginde kendi imleci var; istemezsen Ayarlar'dan kapatabilirsin.",
-  "notes_en": "Stryde now has its own cursor in your accent colour; you can turn it off in Settings."
+  "sha256": "fe168cc85693d443f27324dfbc50c6f8d566171530f04675e00ae2b655ae4453",
+  "sig": "MEUCICs3lULz0qAPpFz5AAWJBRhCe82Pa7sRL73zTwr+s52xAiEAhUzhHsn4jOSH9anEe0SaUa8SErUsB4BolXtDzr71u1A=",
+  "notes": "İmleçler yenilendi: altın çerçeveli lacivert ok, tıklanabilir yerlerde altın el ve Stryde çalışırken dönen dişli çark.",
+  "notes_en": "New cursors: a navy arrow with a gold edge, a gold hand on clickable items and a spinning gear ring while Stryde is working."
 }
