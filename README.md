@@ -3,9 +3,11 @@
 GoodbyeDPI'ı yöneten, tek tık kurulan bir Windows uygulaması. Roblox ve Discord'a takılmadan girmeni sağlar;
 profil resimleri ve oyun görselleri yüklenir, indirme hızın düşmez.
 
+**Site: [nestyyyyyy.github.io/aura](https://nestyyyyyy.github.io/aura/)**
+
 ## İndir
 
-**[⬇ AuraSetup.exe](https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe)** — kurulum programı (0,6 MB). Çalıştır, "Kur"a bas.
+**[⬇ AuraSetup.exe](https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe)** — kurulum programı (yaklaşık 1 MB). Çalıştır, "Kur"a bas.
 
 Diğer seçenekler: [taşınabilir zip](https://github.com/Nestyyyyyy/aura/releases/latest/download/Aura.zip) (.NET 8 Desktop Runtime ister) ·
 [tam zip](https://github.com/Nestyyyyyy/aura/releases/latest/download/Aura-tam.zip) (hiçbir şey gerektirmez, 59 MB)
