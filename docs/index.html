@@ -66,7 +66,7 @@
   /* Üst çubuk */
   .top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 22px; }
   .mark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 22px; letter-spacing: -.02em; }
-  .mark i { width: 12px; height: 12px; background: var(--gold); display: block; }
+  .mark svg { width: 22px; height: 22px; display: block; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: butt; }
   .top nav { display: flex; align-items: center; gap: 28px; font-size: 16px; }
   .top nav a { text-decoration: none; }
   .top nav a:hover { text-decoration: underline; }
@@ -84,6 +84,7 @@
   .lead { font-size: clamp(19px, 1.7vw, 22px); line-height: 1.4; margin: 0; max-width: 34ch; }
   .get { display: flex; align-items: center; gap: 14px 20px; flex-wrap: wrap; margin-top: 24px; }
   .facts { color: var(--graphite); font-size: 16px; margin: 14px 0 0; }
+  .proof { font-size: 16px; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 4px 18px; }
   .elsewhere { margin: 18px 0 0; padding: 14px 16px; background: var(--wash); border-radius: 4px; font-size: 16px; }
   .elsewhere p { margin: 0 0 10px; }
   .window { margin-top: clamp(40px, 5vw, 72px); }
@@ -116,7 +117,9 @@
   .measure .bar b { display: block; height: 100%; background: var(--ink); }
   .measure li.low .value { color: var(--low); }
   .measure li.low .bar b { background: var(--low); }
-  .source { color: var(--graphite); font-size: 15px; margin: 22px 0 0; max-width: 62ch; }
+  .source { color: var(--graphite); font-size: 16px; margin: 14px 0 0; max-width: 66ch; }
+  .measure + .source { margin-top: 26px; }
+  .source strong { color: var(--ink); font-weight: 600; }
 
   /* Kurulum: gerçek bir sıra olduğu için numaralı */
   .steps { margin: 0; padding: 0; list-style: none; counter-reset: n; }
@@ -176,11 +179,12 @@
 <div class="page" id="ust">
 
   <header class="top">
-    <a class="mark" href="#ust" translate="no"><i aria-hidden="true"></i>Aura</a>
+    <a class="mark" href="#ust" translate="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10"/><path d="M7.200 5.300a8.500 8.500 0 1 0 9.600 0"/></svg>Aura</a>
     <nav aria-label="Sayfa bölümleri">
       <a href="#ne-yapar">Ne yapar</a>
       <a href="#kurulum">Kurulum</a>
       <a href="#sorular">Sorular</a>
+      <a href="https://github.com/Nestyyyyyy/aura" rel="noopener">GitHub</a>
       <a class="button small" href="https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe">İndir</a>
     </nav>
   </header>
@@ -195,6 +199,7 @@
             <a class="button" href="https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe">Aura'yı indir</a>
           </div>
           <p class="facts"><span id="surum">Windows&nbsp;10 ve 11.</span> <span id="boyut">0,9&nbsp;MB.</span> Hesap istemez.</p>
+          <p class="proof"><a href="#guven">İmzasız dosya neden güvenli?</a> <a href="https://github.com/Nestyyyyyy/aura/releases" rel="noopener">GitHub'da tüm dosyalar</a></p>
           <div class="elsewhere" id="baska-cihaz" hidden>
             <p>Aura yalnızca Windows bilgisayarda çalışır. Bu sayfanın adresini bilgisayarına gönder.</p>
             <button class="button small plain" type="button" id="kopyala">Adresi kopyala</button>
@@ -237,10 +242,26 @@
       </div>
     </section>
 
+    <section id="guven">
+      <div>
+        <h2>Güven</h2>
+        <p class="aside">İmzasız bir dosya indiriyorsun. Neden imzasız olduğu ve bilgisayarında ne yaptığı burada yazıyor.</p>
+      </div>
+      <div>
+        <dl class="rows">
+          <div><dt>Windows neden uyarıyor?</dt><dd>Kurulum dosyasında dijital imza yok. İmza için her yıl ücret ödenen bir sertifika gerekir, Aura ise tek kişinin yaptığı ücretsiz bir uygulama. Windows SmartScreen imzasız ve az indirilen her dosyada “bilinmeyen yayıncı” uyarısı verir.</dd></div>
+          <div><dt>Antivirüs neden uyarabilir?</dt><dd>Aura, ağ paketlerini değiştirebilmek için <span translate="no">WinDivert</span> sürücüsünü kullanır. Sürücü açık kaynaklıdır ve yazarı tarafından imzalanmıştır. Aynı sürücü kötü amaçla da kullanılabildiği için bazı antivirüsler onu içeren her programı “riskli araç” olarak işaretler.</dd></div>
+          <div><dt>Bilgisayarda ne yapar?</dt><dd>Yönetici izni ister, çünkü sürücüyü yüklemek ve DNS ayarını değiştirmek bunu gerektirir. Kapanırken DNS ayarını eski haline getirir. Kaldırdığında dosyaları ve başlangıç görevleri silinir.</dd></div>
+          <div><dt>Kod açık mı?</dt><dd>Motor (<a href="https://github.com/ValdikSS/GoodbyeDPI" rel="noopener" translate="no">GoodbyeDPI</a>) ve sürücü (<a href="https://github.com/basil00/WinDivert" rel="noopener" translate="no">WinDivert</a>) açık kaynaklıdır. Aura'nın kendi kodu henüz yayınlanmadı.</dd></div>
+          <div><dt>Dosyayı doğrula</dt><dd>Kurulum dosyasının SHA-256 özeti: <code id="ozet" translate="no">GitHub'daki sürüm sayfasında yazar</code>. İndirdiğin dosyada <code translate="no">certutil -hashfile AuraSetup.exe SHA256</code> komutu aynı değeri veriyorsa dosya GitHub'daki ile aynıdır. Dosyayı <a href="https://www.virustotal.com/gui/home/upload" rel="noopener">VirusTotal</a>'a yükleyip kendin de tarayabilirsin. Birkaç antivirüs WinDivert yüzünden uyarı verebilir.</dd></div>
+        </dl>
+      </div>
+    </section>
+
     <section id="hiz">
       <div>
         <h2>İndirme hızı</h2>
-        <p class="aside">Aynı hat, aynı sunucu, tek indirme.</p>
+        <p class="aside">Aynı bilgisayar, aynı hat, aynı sunucu. Üç ölçüm art arda yapıldı.</p>
       </div>
       <div>
         <ul class="measure">
@@ -260,20 +281,22 @@
             <span class="bar" aria-hidden="true"><b style="width:100%"></b></span>
           </li>
         </ul>
-        <p class="source">Türk Telekom, 24&nbsp;Mbps hat, Cloudflare hız testi. Klasik kurulum her bağlantıya müdahale ettiği için indirmeler yavaşlar. Aura yalnızca listedeki adreslere müdahale eder.</p>
+        <p class="source"><strong>Koşullar:</strong> Türk Telekom, 24&nbsp;Mbps hat, kablolu bağlantı, Cloudflare hız testi, tek indirme.</p>
+        <p class="source"><strong>Fark neden oluşuyor:</strong> Klasik kurulum bilgisayardan çıkan her bağlantıyı değiştirir, hız testi ve oyun indirmeleri de buna dahildir. Aura yalnızca listedeki Roblox ve Discord adreslerine giden bağlantıların ilk paketlerini değiştirir. Başka bir adrese giden bağlantıya ve indirilen verinin kendisine dokunmaz.</p>
+        <p class="source"><strong>Daha hızlı hatlar:</strong> Fiber hatta ölçüm yapmadık. Aura'nın yaptığı iş indirilen veri miktarına bağlı olmadığı için hat hızlandıkça kaybın artmasını beklemiyoruz. Kendi hattında görmek için uygulamadaki Ölçümler sayfasında hız testini koruma açıkken ve kapalıyken çalıştır.</p>
       </div>
     </section>
 
     <section id="kurulum">
       <div>
         <h2>Kurulum</h2>
-        <p class="aside">Bir dakikadan kısa sürer.</p>
+        <p class="aside">Kurulum 1&nbsp;dakikadan kısa sürer. İlk açılışta bir kez çalıştıracağın Otomatik Optimize yaklaşık 3&nbsp;dakika sürer.</p>
       </div>
       <div>
         <ol class="steps">
           <li><div><b>İndir ve çalıştır</b><span><code translate="no">AuraSetup.exe</code> dosyasını aç. Windows “bilinmeyen yayıncı” derse önce “Ek bilgi”, sonra “Yine de çalıştır” de.</span></div></li>
-          <li><div><b>“Kur” düğmesine bas</b><span>Yönetici iznine “Evet” de. Aura kurulur, masaüstüne kısayolu gelir ve kendiliğinden açılır.</span></div></li>
-          <li><div><b>Oyna</b><span>Ekranda “KORUMA AKTİF” ve 11/11 yazıyorsa hazırsın. İlk seferde bir kez “Otomatik Optimize” düğmesine bas.</span></div></li>
+          <li><div><b>“Kur” düğmesine bas</b><span>Yönetici iznine “Evet” de. Aura kurulur, masaüstüne kısayolu gelir ve kendiliğinden açılır. Bilgisayarında .NET&nbsp;8 yoksa kurulum programı onu Microsoft'tan kendisi indirip kurar (yaklaşık 58&nbsp;MB, bir kez).</span></div></li>
+          <li><div><b>Oyna</b><span>Ekranda “KORUMA AKTİF” ve 11/11 yazıyorsa hazırsın. İlk seferde bir kez “Otomatik Optimize” düğmesine bas. Aura yaklaşık 3&nbsp;dakikada hattına uyan ayarı bulur.</span></div></li>
         </ol>
         <div class="notes">
           <p><strong>Tarayıcı indirmeyi engellerse:</strong> Chrome ve Edge az indirilen dosyalarda “yaygın olarak indirilmiyor” uyarısı verir. İndirilenler listesinde dosyanın yanındaki menüden “Sakla” de.</p>
@@ -284,13 +307,17 @@
       </div>
     </section>
 
-    <section id="degisiklikler" hidden>
+    <section id="degisiklikler">
       <div>
         <h2>Son değişiklikler</h2>
         <p class="aside">Aura yeni sürümü kendisi kurar.</p>
       </div>
       <div>
-        <ul class="log" id="surumler"></ul>
+        <ul class="log" id="surumler">
+          <li><b>1.3.6<time datetime="2026-11-14">14 Kasım 2026</time></b><span>Arayüz iyileştirmeleri: bağlanırken dönen ışık halkası, daha düzenli sayfalar</span></li>
+          <li><b>1.3.5<time datetime="2026-11-14">14 Kasım 2026</time></b><span>Bildirimler çok azaltıldı; Roblox küçük resimleri artık takılmadan yükleniyor</span></li>
+          <li><b>1.3.4<time datetime="2026-11-14">14 Kasım 2026</time></b><span>Güncellemeden sonra korumanın bir iki dakika çalışmaması düzeltildi</span></li>
+        </ul>
         <p class="more"><a href="https://github.com/Nestyyyyyy/aura/releases" rel="noopener">Tüm sürümler</a></p>
       </div>
     </section>
@@ -326,13 +353,14 @@
         </details>
         <details>
           <summary>Sorun yaşarsam ne yapmalıyım?</summary>
-          <p>Uygulamada Günlük sayfasındaki “Tanı raporu kopyala” düğmesine bas. Sistem, bağlantı ve son olaylar tek metin olarak kopyalanır. Sorunu anlatırken onu da gönder.</p>
+          <p>Uygulamada Günlük sayfasındaki “Tanı raporu kopyala” düğmesine bas. Sistem, bağlantı ve son olaylar tek metin olarak kopyalanır. Sonra <a href="https://github.com/Nestyyyyyy/aura/issues/new?template=sorun-bildir.md" rel="noopener">GitHub'da yeni bir sorun kaydı aç</a>, ne olduğunu yaz ve raporu altına yapıştır.</p>
+          <p>Kayıt herkese açık olur. Yapıştırmadan önce rapordaki “Dış IP” satırını sil. Kayıt açmak için ücretsiz bir GitHub hesabı gerekir.</p>
         </details>
       </div>
     </section>
 
     <div class="closing">
-      <p>Kurulum bir dakika sürer.</p>
+      <p>Kurulum bir dakikadan kısa sürer.</p>
       <a class="button" href="https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe">Aura'yı indir</a>
     </div>
   </main>
@@ -363,8 +391,8 @@
       });
     }
 
-    // Son sürümler GitHub'dan okunur; ulaşılamazsa sayfadaki sabit yazılar kalır ve liste gizli kalır
-    fetch("https://api.github.com/repos/Nestyyyyyy/aura/releases?per_page=4")
+    // Son 3 sürüm, dosya boyutları ve kurulum dosyasının özeti GitHub'dan okunur; ulaşılamazsa sayfadaki sabit yazılar kalır
+    fetch("https://api.github.com/repos/Nestyyyyyy/aura/releases?per_page=3")
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (list) {
         if (!Array.isArray(list)) return;
@@ -380,7 +408,11 @@
         if (kur) document.getElementById("boyut").textContent = kur + ".";
         if (tam) document.getElementById("boyut-tam").textContent = "(" + tam + ")";
 
-        var ul = document.getElementById("surumler");
+        var ozet = (son.assets || []).find(function (x) { return x.name === "AuraSetup.exe"; });
+        if (ozet && /^sha256:/.test(ozet.digest || "")) document.getElementById("ozet").textContent = ozet.digest.slice(7);
+
+        var ul = document.createElement("ul");
+        ul.className = "log"; ul.id = "surumler";
         list.forEach(function (rel) {
           var not = (rel.body || "").trim().split(/\r?\n/)[0];
           if (!not) return;
@@ -397,7 +429,8 @@
           li.appendChild(b); li.appendChild(s);
           ul.appendChild(li);
         });
-        if (ul.children.length) document.getElementById("degisiklikler").hidden = false;
+        var eski = document.getElementById("surumler");
+        if (ul.children.length) eski.parentNode.replaceChild(ul, eski);
       })
       .catch(function () {});
   })();
