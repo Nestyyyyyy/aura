@@ -1,9 +1,9 @@
 {
-  "version": "2.1.1",
-  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.1/Stryde.zip",
+  "version": "2.1.2",
+  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.2/Stryde.zip",
   "mirrors": ["https://nestyyyyyy.github.io/stryde/guncelleme/Stryde.zip", "https://cdn.jsdelivr.net/gh/Nestyyyyyy/stryde@main/docs/guncelleme/Stryde.zip"],
-  "sha256": "00f62109891a745079f7327a4e89501fd4bcc0ab35d541954d63d14f144ac05d",
-  "sig": "MEUCIAQErymhGvYYl4oVx0pGA0QziHwu6vewzhrgx0fq8VDnAiEA5IAdyzEBpctHKuE5bl5aHCxJCztkVElqgYmLlp992s0=",
-  "notes": "Roblox ya da Discord açılınca kendiliğinden çalışma, erişim düşünce kendini onarma ve Sorun bildir düğmesi eklendi; güncellemeler artık imzalı.",
-  "notes_en": "Stryde can now start with Roblox or Discord, repairs itself when access drops, and has a Report a problem button; updates are now signed."
+  "sha256": "da7e6fb8e44eda3cb7e4864e94f5aa6c77702fc56a8e8aadf2ab0badcb48e4ed",
+  "sig": "MEQCIGzyM3BXUCs3mLMhgUYilghDbQS9fACd0KCAZdzc/lEAAiAo0pC7EIO5ok4OUZl/QV5lurBpKeeKmAvIsvXCE3/1uw==",
+  "notes": "Stryde'ın artık vurgu renginde kendi imleci var; istemezsen Ayarlar'dan kapatabilirsin.",
+  "notes_en": "Stryde now has its own cursor in your accent colour; you can turn it off in Settings."
 }
