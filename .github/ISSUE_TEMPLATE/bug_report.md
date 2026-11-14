@@ -24,7 +24,7 @@ labels: sorun
 **Tanı raporu**
 Uygulamada Günlük sayfasındaki "Tanı raporu kopyala" düğmesine bas ve aşağıdaki iki çizginin arasına yapıştır.
 
-Bu kayıt herkese açıktır. Göndermeden önce IP adresinizi sildiğinizden emin olun ("Dış IP" satırı).
+Bu kayıt herkese açıktır. Aura 1.3.7 ve sonrası raporda IP adresini kendisi gizler; yine de göndermeden önce IP adresinizi sildiğinizden emin olun ("Dış IP" satırı).
 
 ```
 (raporu buraya yapıştır)

@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src https://api.github.com; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Aura: Roblox ve Discord'a takılmadan gir</title>
 <meta name="description" content="Aura, Türkiye'deki erişim engelini aşan ücretsiz bir Windows uygulaması. Profil resimleri yüklenir, indirme hızı düşmez.">
 <link rel="canonical" href="https://nestyyyyyy.github.io/aura/">
@@ -252,6 +254,7 @@
           <div><dt>Windows neden uyarıyor?</dt><dd>Kurulum dosyasında dijital imza yok. İmza için her yıl ücret ödenen bir sertifika gerekir, Aura ise tek kişinin yaptığı ücretsiz bir uygulama. Windows SmartScreen imzasız ve az indirilen her dosyada “bilinmeyen yayıncı” uyarısı verir.</dd></div>
           <div><dt>Antivirüs neden uyarabilir?</dt><dd>Aura, ağ paketlerini değiştirebilmek için <span translate="no">WinDivert</span> sürücüsünü kullanır. Sürücü açık kaynaklıdır ve yazarı tarafından imzalanmıştır. Aynı sürücü kötü amaçla da kullanılabildiği için bazı antivirüsler onu içeren her programı “riskli araç” olarak işaretler.</dd></div>
           <div><dt>Bilgisayarda ne yapar?</dt><dd>Yönetici izni ister, çünkü sürücüyü yüklemek ve DNS ayarını değiştirmek bunu gerektirir. Kapanırken DNS ayarını eski haline getirir. Kaldırdığında dosyaları ve başlangıç görevleri silinir.</dd></div>
+          <div><dt>Kendini nasıl korur?</dt><dd>Aura her bağlanışta motor ve sürücü dosyalarının özetini beklenen değerle karşılaştırır. Dosyalardan biri değiştirilmişse motoru başlatmaz. Güncelleme indirdiğinde paketin özetini de doğrular, tutmazsa kurmaz.</dd></div>
           <div><dt>Kod açık mı?</dt><dd>Motor (<a href="https://github.com/ValdikSS/GoodbyeDPI" rel="noopener" translate="no">GoodbyeDPI</a>) ve sürücü (<a href="https://github.com/basil00/WinDivert" rel="noopener" translate="no">WinDivert</a>) açık kaynaklıdır. Aura'nın kendi kodu henüz yayınlanmadı.</dd></div>
           <div><dt>Dosyayı doğrula</dt><dd>Kurulum dosyasının SHA-256 özeti: <code id="ozet" translate="no">GitHub'daki sürüm sayfasında yazar</code>. İndirdiğin dosyada <code translate="no">certutil -hashfile AuraSetup.exe SHA256</code> komutu aynı değeri veriyorsa dosya GitHub'daki ile aynıdır. Dosyayı <a href="https://www.virustotal.com/gui/home/upload" rel="noopener">VirusTotal</a>'a yükleyip kendin de tarayabilirsin. Birkaç antivirüs WinDivert yüzünden uyarı verebilir.</dd></div>
         </dl>
@@ -314,9 +317,9 @@
       </div>
       <div>
         <ul class="log" id="surumler">
+          <li><b>1.3.7<time datetime="2026-11-14">14 Kasım 2026</time></b><span>Dış IP artık gizli gösteriliyor, servis listesi sadeleşti, motor dosyaları her açılışta doğrulanıyor</span></li>
           <li><b>1.3.6<time datetime="2026-11-14">14 Kasım 2026</time></b><span>Arayüz iyileştirmeleri: bağlanırken dönen ışık halkası, daha düzenli sayfalar</span></li>
           <li><b>1.3.5<time datetime="2026-11-14">14 Kasım 2026</time></b><span>Bildirimler çok azaltıldı; Roblox küçük resimleri artık takılmadan yükleniyor</span></li>
-          <li><b>1.3.4<time datetime="2026-11-14">14 Kasım 2026</time></b><span>Güncellemeden sonra korumanın bir iki dakika çalışmaması düzeltildi</span></li>
         </ul>
         <p class="more"><a href="https://github.com/Nestyyyyyy/aura/releases" rel="noopener">Tüm sürümler</a></p>
       </div>
@@ -354,7 +357,7 @@
         <details>
           <summary>Sorun yaşarsam ne yapmalıyım?</summary>
           <p>Uygulamada Günlük sayfasındaki “Tanı raporu kopyala” düğmesine bas. Sistem, bağlantı ve son olaylar tek metin olarak kopyalanır. Sonra <a href="https://github.com/Nestyyyyyy/aura/issues/new?template=bug_report.md" rel="noopener">GitHub'da yeni bir sorun kaydı aç</a>, ne olduğunu yaz ve raporu altına yapıştır.</p>
-          <p>Kayıt herkese açık olur. Yapıştırmadan önce rapordaki “Dış IP” satırını sil. Kayıt açmak için ücretsiz bir GitHub hesabı gerekir.</p>
+          <p>Kayıt herkese açık olur. Aura 1.3.7 ve sonrası raporda IP adresini ve Windows kullanıcı adını kendisi gizler. Yine de göndermeden önce raporda IP adresinin kalmadığına bak. Kayıt açmak için ücretsiz bir GitHub hesabı gerekir.</p>
         </details>
       </div>
     </section>
@@ -372,68 +375,6 @@
   </footer>
 </div>
 
-<script>
-  (function () {
-    var sayi = new Intl.NumberFormat("tr-TR", { maximumFractionDigits: 1 });
-    var tarih = new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric" });
-    var nb = " ";
-
-    // Windows dışındaki cihazlarda indirme işe yaramaz: adresi bilgisayara göndermeyi öner
-    if (!/Windows/i.test(navigator.userAgent)) {
-      var kutu = document.getElementById("baska-cihaz");
-      kutu.hidden = false;
-      document.getElementById("kopyala").addEventListener("click", function () {
-        var durum = document.getElementById("kopyalandi");
-        var adres = "https://nestyyyyyy.github.io/aura/";
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(adres).then(function () { durum.textContent = " Kopyalandı."; }, function () { durum.textContent = " " + adres; });
-        } else { durum.textContent = " " + adres; }
-      });
-    }
-
-    // Son 3 sürüm, dosya boyutları ve kurulum dosyasının özeti GitHub'dan okunur; ulaşılamazsa sayfadaki sabit yazılar kalır
-    fetch("https://api.github.com/repos/Nestyyyyyy/aura/releases?per_page=3")
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (list) {
-        if (!Array.isArray(list)) return;
-        list = list.filter(function (x) { return !x.draft && !x.prerelease && x.tag_name; });
-        if (!list.length) return;
-        var son = list[0];
-        var mb = function (name) {
-          var a = (son.assets || []).find(function (x) { return x.name === name; });
-          return a ? sayi.format(a.size / 1048576) + nb + "MB" : null;
-        };
-        document.getElementById("surum").textContent = "Sürüm " + son.tag_name.replace(/^v/, "") + ". Windows" + nb + "10 ve 11.";
-        var kur = mb("AuraSetup.exe"), tam = mb("Aura-tam.zip");
-        if (kur) document.getElementById("boyut").textContent = kur + ".";
-        if (tam) document.getElementById("boyut-tam").textContent = "(" + tam + ")";
-
-        var ozet = (son.assets || []).find(function (x) { return x.name === "AuraSetup.exe"; });
-        if (ozet && /^sha256:/.test(ozet.digest || "")) document.getElementById("ozet").textContent = ozet.digest.slice(7);
-
-        var ul = document.createElement("ul");
-        ul.className = "log"; ul.id = "surumler";
-        list.forEach(function (rel) {
-          var not = (rel.body || "").trim().split(/\r?\n/)[0];
-          if (!not) return;
-          var li = document.createElement("li");
-          var b = document.createElement("b");
-          b.textContent = rel.tag_name.replace(/^v/, "");
-          var t = document.createElement("time");
-          var d = new Date(rel.published_at);
-          t.dateTime = rel.published_at;
-          t.textContent = tarih.format(d);
-          b.appendChild(t);
-          var s = document.createElement("span");
-          s.textContent = not;
-          li.appendChild(b); li.appendChild(s);
-          ul.appendChild(li);
-        });
-        var eski = document.getElementById("surumler");
-        if (ul.children.length) eski.parentNode.replaceChild(ul, eski);
-      })
-      .catch(function () {});
-  })();
-</script>
+<script src="site.js" defer></script>
 </body>
 </html>
