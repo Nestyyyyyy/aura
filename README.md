@@ -1,33 +1,47 @@
-# Aura — Roblox & Discord için DPI Bypass (Türkiye)
+# Aura
 
-GoodbyeDPI'ı yöneten, tek tık kurulan bir Windows uygulaması. Roblox ve Discord'a takılmadan girmeni sağlar;
-profil resimleri ve oyun görselleri yüklenir, indirme hızın düşmez.
+Türkiye'de Roblox ve Discord'a erişim engelini aşan ücretsiz bir Windows uygulaması.
+Profil resimleri ve oyun görselleri yüklenir, indirme hızı düşmez.
 
-**Site: [nestyyyyyy.github.io/aura](https://nestyyyyyy.github.io/aura/)**
+**[Aura'yı indir (AuraSetup.exe)](https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe)** · [Site](https://nestyyyyyy.github.io/aura/) · [Tüm sürümler](https://github.com/Nestyyyyyy/aura/releases)
 
-## İndir
+![Aura ana ekranı: güç düğmesi, KORUMA AKTİF yazısı ve 11 sunucunun erişim durumu](docs/img/panel.png)
 
-**[⬇ AuraSetup.exe](https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe)** — kurulum programı (yaklaşık 1 MB). Çalıştır, "Kur"a bas.
+## Ne yapar
 
-Diğer seçenekler: [taşınabilir zip](https://github.com/Nestyyyyyy/aura/releases/latest/download/Aura.zip) (.NET 8 Desktop Runtime ister) ·
-[tam zip](https://github.com/Nestyyyyyy/aura/releases/latest/download/Aura-tam.zip) (hiçbir şey gerektirmez, 59 MB)
+- Roblox ve Discord'un 11 sunucusuna erişimi açar ve her birini 2 dakikada bir denetler.
+- Roblox'un resim sunucularını çalışan adreslere yönlendirir, profil fotoğrafları boş kalmaz.
+- Yalnızca Roblox ve Discord adreslerine dokunur. Diğer indirmeler olduğu gibi kalır.
+- 7 modu senin hattında dener ve eksiksiz çalışan en hafifini seçer.
+- Yeni sürümü kendisi kurar.
+- Başka engelli siteler için isteğe bağlı Cloudflare WARP tüneli içerir.
 
-Windows "bilinmeyen yayıncı" uyarısı gösterirse: **Ek bilgi → Yine de çalıştır** (dosya imzasız olduğu için çıkar).
+## Hangi dosyayı indirmeliyim?
 
-## Özellikler
+| Dosya | Kimin için |
+|---|---|
+| `AuraSetup.exe` | Çoğu kişi için doğru seçim. Aura'yı kurar. Bilgisayarda .NET 8 yoksa onu da Microsoft'tan indirir. |
+| `Aura-tam.zip` | Kurmak istemeyenler için. Hiçbir şey gerektirmez. Klasöre çıkar, `Aura.exe` dosyasını çalıştır. |
+| `Aura.zip` | Kurmak istemeyenler için küçük paket. Bilgisayarda .NET 8 Desktop Runtime kurulu olmalı. |
 
-- **Şifreli DNS (DoH):** ISS sorguları okuyamaz, sahte cevap veremez; önbellekli ve yedekli.
-- **Sadece gerekene müdahale:** yalnızca Roblox/Discord alan adları; diğer trafik ve indirme hızı etkilenmez.
-- **Servis durumu:** 11 Roblox/Discord sunucusunu gerçek bağlantıyla test eder.
-- **Otomatik optimize:** 7 modu dener, hattında çalışan en hafifini seçer.
-- **Kendi kendini günceller**, Windows ile başlar, çökerse toparlar.
-- **İsteğe bağlı VPN:** Cloudflare WARP (WireGuard).
+Windows 10 ve 11, 64 bit.
 
-## Notlar
+## Uyarılar neden çıkıyor?
 
-- Aura bir VPN değildir, IP'ni gizlemez; yalnızca engeli aşar.
-- Antivirüs `engine\WinDivert64.sys` için uyarırsa yanlış pozitiftir (açık kaynak ağ sürücüsü). Kaspersky ile çalışmaz.
-- Kaldırmak için: Windows Ayarlar → Uygulamalar → Aura DPI Bypass → Kaldır.
+- **Windows "bilinmeyen yayıncı" der**, çünkü kurulum dosyasında dijital imza yok. "Ek bilgi" ve ardından "Yine de çalıştır" diyerek devam edebilirsin.
+- **Antivirüs uyarı verebilir**, çünkü Aura ağ paketlerini değiştirmek için WinDivert sürücüsünü kullanır. Bazı antivirüsler bu sürücüyü içeren her programı işaretler. Kaspersky ile çalışmaz.
 
-Motor: [GoodbyeDPI](https://github.com/ValdikSS/GoodbyeDPI) 0.2.3rc3 (Türkiye paketi) ve [WinDivert](https://github.com/basil00/WinDivert) 2.2.
-Kullanımdan doğan sorumluluk kullanıcıya aittir.
+Her sürümün dosya özetleri (SHA-256) sürüm notlarının altında yazar.
+
+## Bu depo hakkında
+
+Bu depo web sitesini ve resmi sürümleri barındırır. Motor olarak açık kaynaklı
+[GoodbyeDPI](https://github.com/ValdikSS/GoodbyeDPI) ve [WinDivert](https://github.com/basil00/WinDivert) kullanılır.
+Aura'nın kendi kaynak kodu bu depoda yer almaz.
+
+## Sorun bildirmek
+
+[Yeni bir sorun kaydı aç](https://github.com/Nestyyyyyy/aura/issues/new?template=bug_report.md). Kayıtlar herkese açıktır,
+tanı raporunu yapıştırırken IP adresini sildiğinden emin ol.
+
+Roblox ve Discord kendi sahiplerinin markalarıdır, Aura bu şirketlerle bağlantılı değildir. Kullanım sorumluluğu kullanıcıya aittir.
