@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aura · Roblox ve Discord için DPI bypass</title>
+<meta name="description" content="Aura, Türkiye'de Roblox ve Discord'a takılmadan girmek için tek tık bir Windows uygulaması. Profil resimleri yüklenir, indirme hızı düşmez. Ücretsiz.">
+<meta name="theme-color" content="#1b1a33">
+<link rel="icon" type="image/png" href="img/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aura · Roblox ve Discord'a takılmadan gir">
+<meta property="og:description" content="Tek tık Windows uygulaması. Profil resimleri yüklenir, indirme hızı düşmez. Ücretsiz.">
+<meta property="og:image" content="https://nestyyyyyy.github.io/aura/img/panel.png">
+<meta property="og:url" content="https://nestyyyyyy.github.io/aura/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg-1: #1b1a33; --bg-2: #241c3a; --bg-3: #162a3c;
+    --card: rgba(42, 40, 64, .62); --card-line: rgba(212, 175, 55, .22); --line: #33334a;
+    --fg: #f3eee2; --muted: #a09eb4; --dim: #6c6a80;
+    --gold: #d4af37; --gold-2: #f3d77f; --ok: #3ddc97; --bad: #ff5c7a;
+    --display: "Barlow", "Bahnschrift", "Segoe UI", sans-serif;
+    --body: "Manrope", "Segoe UI", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--fg); font-family: var(--body); line-height: 1.6;
+    background: linear-gradient(135deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3)) fixed;
+    overflow-x: hidden;
+  }
+  /* Aurora: uygulamadaki gibi yavaşça kayan ışık lekeleri */
+  .aurora { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .aurora i { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .5; }
+  .aurora i:nth-child(1) { width: 620px; height: 620px; right: -160px; top: -220px; background: #d4af37; opacity: .30; animation: drift 26s ease-in-out infinite alternate; }
+  .aurora i:nth-child(2) { width: 560px; height: 560px; left: -200px; top: 38%; background: #8a5cff; opacity: .26; animation: drift 32s ease-in-out infinite alternate-reverse; }
+  .aurora i:nth-child(3) { width: 520px; height: 520px; right: 8%; bottom: -260px; background: #2fd1c8; opacity: .22; animation: drift 38s ease-in-out infinite alternate; }
+  @keyframes drift { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(-60px, 50px, 0) scale(1.15); } }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding-inline: 22px; }
+  a { color: var(--gold-2); }
+
+  nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--gold-2); }
+  .brand img { width: 44px; height: 44px; filter: drop-shadow(0 0 14px rgba(212, 175, 55, .45)); }
+  .brand b { font-family: var(--display); font-size: 24px; font-weight: 600; letter-spacing: .28em; line-height: 1; }
+  .brand small { display: block; font-size: 9px; letter-spacing: .26em; color: var(--muted); margin-top: 5px; font-weight: 700; }
+  nav .links { display: flex; align-items: center; gap: 22px; font-size: 14px; }
+  nav .links a { color: var(--muted); text-decoration: none; }
+  nav .links a:hover { color: var(--fg); }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 26px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 15px; transition: transform .14s ease, box-shadow .14s ease, background .14s ease; }
+  .btn:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 3px; }
+  .btn-gold { background: linear-gradient(135deg, #f6de8c, #d4af37 55%, #a8842a); color: #141208; box-shadow: 0 10px 34px rgba(212, 175, 55, .28); }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(212, 175, 55, .4); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--fg); background: rgba(255, 255, 255, .03); }
+  .btn-ghost:hover { border-color: var(--card-line); background: rgba(255, 255, 255, .07); }
+  .btn-sm { padding: 10px 18px; font-size: 13.5px; border-radius: 12px; }
+  .btn small { font-weight: 600; opacity: .7; }
+
+  .hero { padding-block: 46px 30px; text-align: center; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(212, 175, 55, .12); border: 1px solid rgba(212, 175, 55, .4); color: var(--gold-2); font-size: 12.5px; font-weight: 700; }
+  .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(38px, 7vw, 70px); line-height: 1.04; margin: 22px auto 16px; max-width: 14ch; text-wrap: balance; letter-spacing: -.01em; }
+  h1 em { font-style: normal; background: linear-gradient(120deg, #f6de8c, #d4af37 60%, #f3d77f); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: clamp(16px, 2.2vw, 19px); color: var(--muted); max-width: 58ch; margin: 0 auto; }
+  .dl { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .meta { color: var(--dim); font-size: 13px; margin-top: 16px; display: flex; gap: 8px 20px; flex-wrap: wrap; justify-content: center; }
+
+  .shot { position: relative; margin: 46px auto 0; max-width: 1000px; }
+  .shot::before { content: ""; position: absolute; inset: 8% 6% -4%; background: radial-gradient(closest-side, rgba(212, 175, 55, .35), transparent); filter: blur(60px); z-index: -1; }
+  .shot img { display: block; width: 100%; height: auto; border-radius: clamp(10px, 2.2vw, 24px); box-shadow: 0 30px 90px rgba(0, 0, 0, .55); }
+
+  section { padding-block: 64px 0; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .22em; color: var(--gold); text-transform: uppercase; }
+  h2 { font-family: var(--display); font-size: clamp(28px, 4.4vw, 42px); font-weight: 700; margin: 8px 0 12px; line-height: 1.12; text-wrap: balance; }
+  .sub { color: var(--muted); max-width: 62ch; margin: 0 0 28px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--card-line); border-radius: 20px; padding: 22px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: transform .16s ease, border-color .16s ease; }
+  .card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, .5); }
+  .ico { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: rgba(212, 175, 55, .14); border: 1px solid rgba(212, 175, 55, .4); margin-bottom: 14px; }
+  .ico svg { width: 20px; height: 20px; stroke: var(--gold-2); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .card h3 { margin: 0 0 6px; font-family: var(--display); font-size: 19px; font-weight: 600; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+  .steps { counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .step { counter-increment: s; }
+  .step::before { content: counter(s); display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; font-family: var(--display); font-weight: 700; font-size: 18px; color: #141208; background: linear-gradient(135deg, #f6de8c, #d4af37 55%, #a8842a); margin-bottom: 14px; }
+  .note { margin-top: 18px; border-left: 2px solid var(--gold); padding: 10px 16px; color: var(--muted); font-size: 14px; background: rgba(255, 255, 255, .03); border-radius: 0 12px 12px 0; }
+  .note b { color: var(--fg); }
+  code { font-family: Consolas, "Cascadia Mono", monospace; font-size: .92em; color: var(--gold-2); }
+
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  .gallery figure { margin: 0; }
+  .gallery img { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 18px 50px rgba(0, 0, 0, .45); }
+  .gallery figcaption { color: var(--muted); font-size: 13.5px; margin-top: 10px; }
+
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 420px; }
+  th, td { text-align: left; padding: 13px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--dim); font-weight: 700; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; }
+  td.num { font-variant-numeric: tabular-nums; font-weight: 600; }
+  tr.best td { color: var(--ok); }
+  tr.best td:first-child { color: var(--fg); }
+
+  details { border-bottom: 1px solid var(--line); padding-block: 4px; }
+  summary { cursor: pointer; padding-block: 14px; font-weight: 600; font-size: 16px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--gold); font-size: 22px; line-height: 1; transition: transform .2s ease; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 0 0 16px; color: var(--muted); max-width: 70ch; }
+
+  .cta { margin-top: 72px; text-align: center; padding: 44px 22px; border-radius: 26px; background: linear-gradient(135deg, rgba(212, 175, 55, .2), rgba(42, 40, 64, .7) 55%, rgba(47, 209, 200, .14)); border: 1px solid var(--card-line); }
+  .cta h2 { margin-top: 0; }
+  footer { margin-top: 56px; padding-block: 24px 40px; border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; }
+
+  @media (max-width: 640px) {
+    nav .links a:not(.btn) { display: none; }
+    .dl .btn { width: 100%; }
+    section { padding-block: 48px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aurora i { animation: none; }
+    .btn, .card { transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="wrap">
+  <nav>
+    <a class="brand" href="./">
+      <img src="img/logo.png" alt="" width="44" height="44">
+      <span><b>AURA</b><small>DPI BYPASS · TÜRKİYE</small></span>
+    </a>
+    <div class="links">
+      <a href="#ozellikler">Özellikler</a>
+      <a href="#kurulum">Kurulum</a>
+      <a href="#sorular">Sorular</a>
+      <a class="btn btn-gold btn-sm" href="https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe">İndir</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="pill" id="surum">Ücretsiz · Windows 10 ve 11</span>
+    <h1>Roblox ve Discord'a <em>takılmadan</em> gir.</h1>
+    <p class="lead">Aura tek tıkla engeli aşan bir Windows uygulaması. Profil resimleri ve oyun görselleri yüklenir, indirme hızın düşmez, ayarla uğraşmazsın.</p>
+    <div class="dl">
+      <a class="btn btn-gold" href="https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe">Aura'yı indir <small id="boyut-kur">· 0,9 MB</small></a>
+      <a class="btn btn-ghost" href="#kurulum">Nasıl kurulur?</a>
+    </div>
+    <div class="meta">
+      <span>Kurulum her şeyi kendi halleder</span>
+      <span>Sonraki sürümleri uygulama kendi günceller</span>
+      <span>Türkçe ve İngilizce</span>
+    </div>
+    <div class="shot">
+      <img src="img/panel.png" width="1068" height="712" alt="Aura ana ekranı: ortada güç düğmesi ve KORUMA AKTİF yazısı, sağda 11 Roblox ve Discord servisinin erişim durumu">
+    </div>
+  </header>
+
+  <section id="ozellikler">
+    <div class="eyebrow">Özellikler</div>
+    <h2>Aç, bas, oyna.</h2>
+    <p class="sub">Aura arka planda GoodbyeDPI motorunu yönetir. Hangi ayarın senin hattında çalıştığını kendisi bulur ve sorun çıkarsa kendisi toparlar.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M6.3 7.2a8 8 0 1 0 11.4 0"/></svg></div>
+        <h3>Tek düğme</h3>
+        <p>Güç düğmesine bas, koruma açılsın. İstersen Windows açılırken kendiliğinden başlar ve tepside sessizce durur.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 15-4-4-6 7"/></svg></div>
+        <h3>Resimler yüklenir</h3>
+        <p>Profil fotoğrafları ve oyun görselleri boş kalmaz. Aura, Roblox'un resim sunucularını çalışan adreslere yönlendirir.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg></div>
+        <h3>Hızın düşmez</h3>
+        <p>Yalnızca Roblox ve Discord adreslerine dokunur. Steam, YouTube ve tarayıcı indirmeleri tam hızda kalır.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 18V9"/><path d="M10 18V5"/><path d="M16 18v-7"/><path d="M22 18H2"/></svg></div>
+        <h3>Otomatik optimize</h3>
+        <p>Yedi farklı modu senin hattında dener ve eksiksiz çalışan en hafifini seçer. Bir kez basman yeter.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.2 7.6 8 9 4.800-1.400 8-4.500 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Şifreli DNS</h3>
+        <p>Adres sorgularını şifreleyerek gönderir. İnternet sağlayıcın okuyamaz ve sahte cevap veremez.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div>
+        <h3>Servis durumu</h3>
+        <p>11 Roblox ve Discord sunucusunu sürekli denetler. Hangisi açık, hangisi engelli, gecikmesi kaç, hepsini görürsün.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+        <h3>İsteğe bağlı VPN</h3>
+        <p>Başka engelli siteler için Cloudflare WARP tüneli. Ücretsiz, hesap istemez, tek tıkla açılır ve kapanır.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.600"/><path d="M20 4v5h-5"/></svg></div>
+        <h3>Kendini günceller</h3>
+        <p>Yeni sürüm çıkınca Aura haber verir ve tek tıkla kurar. Siteye tekrar gelmen gerekmez.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kurulum">
+    <div class="eyebrow">Kurulum</div>
+    <h2>Üç adımda hazır.</h2>
+    <p class="sub">Bir dakikadan kısa sürer. Kurulum programı eksik olan her şeyi kendisi indirir.</p>
+    <div class="steps">
+      <div class="card step">
+        <h3>İndir ve çalıştır</h3>
+        <p><code>AuraSetup.exe</code> dosyasını indirip aç. Windows "bilinmeyen yayıncı" derse "Ek bilgi" ve ardından "Yine de çalıştır" de.</p>
+      </div>
+      <div class="card step">
+        <h3>"Kur"a bas</h3>
+        <p>Yönetici iznine "Evet" de. Aura kurulur, masaüstüne kısayolu gelir ve kendiliğinden açılır.</p>
+      </div>
+      <div class="card step">
+        <h3>Oyna</h3>
+        <p>Ekranda "KORUMA AKTİF" ve 11/11 görüyorsan hazırsın. İlk seferde bir kez "Otomatik Optimize"a basman iyi olur.</p>
+      </div>
+    </div>
+    <div class="note"><b>Antivirüs uyarı verirse</b> yanlış alarmdır. Aura'nın kullandığı ağ sürücüsü (WinDivert) açık kaynaklıdır ama bazı antivirüsler onu şüpheli sayar. Kurulum klasörünü dışlamalara ekle. Kaspersky ile çalışmaz.</div>
+    <div class="note"><b>Kurmak istemiyorsan</b> <a href="https://github.com/Nestyyyyyy/aura/releases/latest/download/Aura-tam.zip">tam paketi</a> <span id="boyut-tam">(yaklaşık 60 MB)</span> bir klasöre çıkarıp <code>Aura.exe</code> dosyasını çalıştırabilirsin. .NET 8 kuruluysa <a href="https://github.com/Nestyyyyyy/aura/releases/latest/download/Aura.zip">küçük paket</a> de yeter.</div>
+    <div class="note"><b>Kaldırmak için</b> Windows Ayarlar, Uygulamalar, "Aura DPI Bypass", Kaldır. Koruma kapanır, internet ayarların eski haline döner.</div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Görünüm</div>
+    <h2>Sade ve şık.</h2>
+    <p class="sub">Dört renk teması, Türkçe ve İngilizce arayüz, isteğe bağlı arayüz sesleri.</p>
+    <div class="gallery">
+      <figure>
+        <img src="img/alan-adlari.png" width="1068" height="712" loading="lazy" alt="Alan Adları sayfası: müdahale edilen sitelerin listesi ve tek tıkla site ekleme kutusu">
+        <figcaption>Açılmayan bir siteyi yaz, Aura engelli mi diye bakıp listeye eklesin.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/vpn.png" width="1068" height="712" loading="lazy" alt="VPN sayfası: Cloudflare WARP tünelini açma düğmesi ve bağlantı noktası seçenekleri">
+        <figcaption>Oyun dışındaki engelli siteler için tek tıkla VPN.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Ölçüm</div>
+    <h2>İndirme hızın yerinde kalır.</h2>
+    <p class="sub">Aynı hat ve aynı sunucuyla ölçüldü: Türk Telekom, 24 Mbps, Cloudflare hız testi.</p>
+    <div class="tablewrap card">
+      <table>
+        <tr><th>Durum</th><th>Tek indirme</th><th>Çoklu indirme</th></tr>
+        <tr><td>Koruma kapalı</td><td class="num">24,6 Mbps</td><td class="num">24,1 Mbps</td></tr>
+        <tr><td>Klasik GoodbyeDPI (tüm trafik)</td><td class="num">4,7 Mbps</td><td class="num">12,2 Mbps</td></tr>
+        <tr class="best"><td>Aura</td><td class="num">24,7 Mbps</td><td class="num">24,3 Mbps</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="sorular">
+    <div class="eyebrow">Sorular</div>
+    <h2>Merak edilenler.</h2>
+    <details>
+      <summary>Ücretli mi?</summary>
+      <p>Hayır. Aura ücretsizdir, hesap açmanı istemez ve reklam göstermez.</p>
+    </details>
+    <details>
+      <summary>Aura bir VPN mi? IP adresimi gizler mi?</summary>
+      <p>Hayır. Aura engeli aşar ama IP adresini değiştirmez, girdiğin site gerçek IP adresini görür. Bu yüzden oyunda gecikmen artmaz. IP adresinin değişmesini istersen uygulamanın içindeki VPN sayfasını kullanabilirsin.</p>
+    </details>
+    <details>
+      <summary>Windows neden "bilinmeyen yayıncı" diyor?</summary>
+      <p>Kurulum dosyası ücretli bir dijital imza taşımadığı için. "Ek bilgi" ve ardından "Yine de çalıştır" diyerek devam edebilirsin.</p>
+    </details>
+    <details>
+      <summary>Hangi internet sağlayıcılarında çalışır?</summary>
+      <p>Türk Telekom hattında geliştirildi ve ölçüldü. Diğer sağlayıcılarda "Otomatik Optimize" senin hattına uyan modu arar. Hiçbir mod çalışmazsa uygulama bunu açıkça söyler.</p>
+    </details>
+    <details>
+      <summary>Aura'yı kapatınca internetim bozulur mu?</summary>
+      <p>Hayır. Aura kapanırken yaptığı tüm ayarları geri alır. Bilgisayar aniden kapansa bile bir sonraki açılışta ayarlar kendiliğinden düzeltilir.</p>
+    </details>
+    <details>
+      <summary>Bir sorun yaşarsam ne yapmalıyım?</summary>
+      <p>Uygulamada Günlük sayfasındaki "Tanı raporu kopyala" düğmesine bas. Sistem, bağlantı ve son olaylar tek metin olarak kopyalanır, sorunu anlatırken onu da gönder.</p>
+    </details>
+  </section>
+
+  <div class="cta">
+    <h2>Hazırsan başlayalım.</h2>
+    <p class="sub" style="margin-inline:auto">Kurulum bir dakikadan kısa sürer.</p>
+    <a class="btn btn-gold" href="https://github.com/Nestyyyyyy/aura/releases/latest/download/AuraSetup.exe">Aura'yı indir</a>
+  </div>
+
+  <footer>
+    Aura, açık kaynaklı <a href="https://github.com/ValdikSS/GoodbyeDPI" rel="noopener">GoodbyeDPI</a> ve <a href="https://github.com/basil00/WinDivert" rel="noopener">WinDivert</a> üzerine kuruludur.
+    Tüm sürümler: <a href="https://github.com/Nestyyyyyy/aura/releases" rel="noopener">github.com/Nestyyyyyy/aura</a>.
+    Roblox ve Discord, kendi sahiplerinin markalarıdır; Aura bu şirketlerle bağlantılı değildir. Kullanım sorumluluğu kullanıcıya aittir.
+  </footer>
+</div>
+
+<script>
+  // Son sürümü ve dosya boyutlarını GitHub'dan al; ulaşılamazsa sayfadaki sabit yazılar kalır
+  fetch("https://api.github.com/repos/Nestyyyyyy/aura/releases/latest")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (rel) {
+      if (!rel || !rel.tag_name) return;
+      document.getElementById("surum").textContent = "Son sürüm " + rel.tag_name + " · Ücretsiz · Windows 10 ve 11";
+      var mb = function (name) {
+        var a = (rel.assets || []).find(function (x) { return x.name === name; });
+        return a ? (a.size / 1048576).toFixed(a.size < 10485760 ? 1 : 0).replace(".", ",") + " MB" : null;
+      };
+      var kur = mb("AuraSetup.exe"), tam = mb("Aura-tam.zip");
+      if (kur) document.getElementById("boyut-kur").textContent = "· " + kur;
+      if (tam) document.getElementById("boyut-tam").textContent = "(" + tam + ")";
+    })
+    .catch(function () {});
+</script>
+</body>
+</html>
