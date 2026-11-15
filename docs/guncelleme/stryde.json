@@ -1,9 +1,9 @@
 {
-  "version": "2.1.5",
-  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.5/Stryde.zip",
+  "version": "2.1.6",
+  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.6/Stryde.zip",
   "mirrors": ["https://nestyyyyyy.github.io/stryde/guncelleme/Stryde.zip", "https://cdn.jsdelivr.net/gh/Nestyyyyyy/stryde@main/docs/guncelleme/Stryde.zip"],
-  "sha256": "dc509d195f43f494d2d7068f4a49da8a39e46cee3ac3b287da71b5f850db74ea",
-  "sig": "MEUCIE8qq1gNpJUjWAultfqHsR27DMqY+NH7/08SKhl05IkOAiEAhX2Dooe/I/lV/wqZUbsL5piF+/7keW5USqq4htSA2G8=",
-  "notes": "Biraz atmosfer geri geldi: arkada çok hafif ortam ışığı, üst kenarı ışıklı yükseltilmiş kartlar ve koruma açıkken güç düğmesinde yumuşak hare.",
-  "notes_en": "A little atmosphere is back: a faint ambient light behind the window, raised cards with a thin top highlight and a soft halo on the power button while protection is on."
+  "sha256": "22b90407cd57024e7172db0bb13a913f47e7fc8c2be28076c73138cbd88bcc31",
+  "sig": "MEUCIDwLtv9+ZGNUBk7GLIXUTWY2X8ATa7pdbIXTBFgP4KlWAiEA6nGvESlrc9uT1Q+z9mgCLyF6PxNOUur7MLozaFYSwn8=",
+  "notes": "Yeni görünüm: renkli ve yuvarlak sol menü, kutusundan çıkmış güç düğmesi, yumuşak köşeli cam kartlar, hap biçimli düğmeler ve belirgin ortam ışığı.",
+  "notes_en": "A new look: a colourful rounded sidebar, the power button out in the open instead of inside a box, softly rounded glass cards, pill-shaped buttons and a clearly visible ambient light."
 }
