@@ -1,9 +1,9 @@
 {
-  "version": "2.1.3",
-  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.3/Stryde.zip",
+  "version": "2.1.4",
+  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.4/Stryde.zip",
   "mirrors": ["https://nestyyyyyy.github.io/stryde/guncelleme/Stryde.zip", "https://cdn.jsdelivr.net/gh/Nestyyyyyy/stryde@main/docs/guncelleme/Stryde.zip"],
-  "sha256": "fe168cc85693d443f27324dfbc50c6f8d566171530f04675e00ae2b655ae4453",
-  "sig": "MEUCICs3lULz0qAPpFz5AAWJBRhCe82Pa7sRL73zTwr+s52xAiEAhUzhHsn4jOSH9anEe0SaUa8SErUsB4BolXtDzr71u1A=",
-  "notes": "İmleçler yenilendi: altın çerçeveli lacivert ok, tıklanabilir yerlerde altın el ve Stryde çalışırken dönen dişli çark.",
-  "notes_en": "New cursors: a navy arrow with a gold edge, a gold hand on clickable items and a spinning gear ring while Stryde is working."
+  "sha256": "e25ad825956a305c1335ff73833b6f59bf152227afd2c1bc97e53bce4b4e10a0",
+  "sig": "MEQCIELh1dLx3FZjH+fRt5IPHkOhizeHIFdgHoMOfMzyfB4tAiA27/A5DBSHwd+SRUrd0b2RF6tbeZcTSQ9qOYcCqtGvQQ==",
+  "notes": "Daha sade ve keskin görünüm: mat yüzeyler, gradyan ve parlama yok, yeni elmas imleç ve düzenlenmiş sayfalar.",
+  "notes_en": "A cleaner, flatter look: matte surfaces, sharper corners, no gradients or glow, a new diamond pointer and tidier pages."
 }
