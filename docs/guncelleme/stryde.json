@@ -1,9 +1,9 @@
 {
-  "version": "2.1.4",
-  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.4/Stryde.zip",
+  "version": "2.1.5",
+  "url": "https://github.com/Nestyyyyyy/stryde/releases/download/v2.1.5/Stryde.zip",
   "mirrors": ["https://nestyyyyyy.github.io/stryde/guncelleme/Stryde.zip", "https://cdn.jsdelivr.net/gh/Nestyyyyyy/stryde@main/docs/guncelleme/Stryde.zip"],
-  "sha256": "e25ad825956a305c1335ff73833b6f59bf152227afd2c1bc97e53bce4b4e10a0",
-  "sig": "MEQCIELh1dLx3FZjH+fRt5IPHkOhizeHIFdgHoMOfMzyfB4tAiA27/A5DBSHwd+SRUrd0b2RF6tbeZcTSQ9qOYcCqtGvQQ==",
-  "notes": "Daha sade ve keskin görünüm: mat yüzeyler, gradyan ve parlama yok, yeni elmas imleç ve düzenlenmiş sayfalar.",
-  "notes_en": "A cleaner, flatter look: matte surfaces, sharper corners, no gradients or glow, a new diamond pointer and tidier pages."
+  "sha256": "dc509d195f43f494d2d7068f4a49da8a39e46cee3ac3b287da71b5f850db74ea",
+  "sig": "MEUCIE8qq1gNpJUjWAultfqHsR27DMqY+NH7/08SKhl05IkOAiEAhX2Dooe/I/lV/wqZUbsL5piF+/7keW5USqq4htSA2G8=",
+  "notes": "Biraz atmosfer geri geldi: arkada çok hafif ortam ışığı, üst kenarı ışıklı yükseltilmiş kartlar ve koruma açıkken güç düğmesinde yumuşak hare.",
+  "notes_en": "A little atmosphere is back: a faint ambient light behind the window, raised cards with a thin top highlight and a soft halo on the power button while protection is on."
 }
